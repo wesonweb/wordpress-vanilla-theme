@@ -45,20 +45,23 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation">
+		<!-- <nav id="site-navigation" class="main-navigation"> -->
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" id="logo-link"><img src="" alt="" class="logo">Logo</a>
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'starter-theme' ); ?></button>
 			<?php
 				wp_nav_menu( 
 					array(
-						'menu' 				=> 'primary',
-						'container'			=> '',
 						'theme_location' 	=> 'primary',
-						'menu_id'        	=> 'primary-menu',
+						'menu' 				=> 'primary',
+						'menu_class'		=> 'nav-menu',
+						'menu_id'			=> 'nav-menu',
+						'container'			=> 'nav',
+						'walker'			=> new Clean_Walker_Nav()
 						// 'items_wrap'		=> '<ul id="addidhere" class="addclasshere">%3$s</ul>'
 				) );
 			?>
-		</nav><!-- #site-navigation -->
+		<!-- </nav> -->
+		<!-- #site-navigation -->
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">
