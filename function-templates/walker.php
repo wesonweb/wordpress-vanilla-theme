@@ -1,22 +1,28 @@
 <?php
 // add arrows to menu parent
 function oenology_add_menu_parent_class( $items ) {
-	$parents = array();
-	foreach ( $items as $item ) {
-	if ( $item->menu_item_parent && $item->menu_item_parent > 0 ) {
-	$parents[] = $item->menu_item_parent;
-	}
-}
-	foreach ( $items as $item ) {
-	if ( in_array( $item->ID, $parents ) ) {
-	$item->classes[] = 'has-children';
-	}
-}
-return $items;
+
+ $parents = array();
+ foreach ( $items as $item ) {
+ if ( $item->menu_item_parent && $item->menu_item_parent > 0 ) {
+ $parents[] = $item->menu_item_parent;
+ }
+ }
+
+ foreach ( $items as $item ) {
+ if ( in_array( $item->ID, $parents ) ) {
+ $item->classes[] = 'has-children';
+ }
+ }
+
+ return $items;
 }
 add_filter( 'wp_nav_menu_objects', 'oenology_add_menu_parent_class' );
 
+
 //tidy up navigation by removing redundant classes and id
+
+
 class Clean_Walker_Nav extends Walker_Nav_Menu {
 	/**
 	 * Filter used to remove built in WordPress-generated classes
@@ -28,7 +34,8 @@ class Clean_Walker_Nav extends Walker_Nav_Menu {
 	}
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<ul>\n";
+		// add class of submenu
+		$output .= "\n$indent<ul class=\"submenu\">\n";
 	}
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
