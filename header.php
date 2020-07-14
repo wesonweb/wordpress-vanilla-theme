@@ -45,22 +45,21 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
-		<!-- <nav id="site-navigation" class="main-navigation"> -->
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" id="logo-link"><img src="" alt="" class="logo">Logo</a>
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'starter-theme' ); ?></button>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'MENU &#9776;', 'update' ); ?></button>
 			<?php
-				wp_nav_menu( 
-					array(
-						'theme_location' 	=> 'primary',
-						'menu' 				=> 'primary',
-						'menu_class'		=> 'nav-menu',
-						'menu_id'			=> 'nav-menu',
-						'container'			=> 'nav',
-						'walker'			=> new Clean_Walker_Nav()
-						// 'items_wrap'		=> '<ul id="addidhere" class="addclasshere">%3$s</ul>'
-				) );
+				wp_nav_menu( array(
+					'theme_location'	=> 'primary-menu',
+					'menu_class'		=> 'nav-menu',
+					'menu_id'			=> 'nav-menu',
+					'container'			=> 'nav',
+					'container_class'	=> 'main-navigation',
+					'container_id'		=>	'main-navigation',
+					'echo'				=> true,
+					'walker'			=> new Clean_Walker_Nav()
+
+				));
 			?>
-		<!-- </nav> -->
 		<!-- #site-navigation -->
 	</header><!-- #masthead -->
 

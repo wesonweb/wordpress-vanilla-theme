@@ -173,7 +173,7 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 // get walker nav for wp_nav_menu
-require(get_template_directory().'/function-templates/walker-navigation.php');
+require(get_template_directory().'/function-templates/walker.php');
 
 
 
