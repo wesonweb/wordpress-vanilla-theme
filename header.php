@@ -49,7 +49,7 @@
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'MENU &#9776;', 'update' ); ?></button>
 			<?php
 				wp_nav_menu( array(
-					'theme_location'	=> 'primary-menu',
+					'theme_location'	=> 'primary',
 					'menu_class'		=> 'nav-menu',
 					'menu_id'			=> 'nav-menu',
 					'container'			=> 'nav',
