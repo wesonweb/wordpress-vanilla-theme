@@ -1,8 +1,8 @@
-/*!
-Theme Name: Wordpress vanilla starter theme
+/*
+Theme Name: Wordpress starter theme
 Theme URI: based on http://underscores.me/
 Author: Wes
-Description: Vanialla theme for WordPress
+Description: starter theme for WordPress
 Version: 1.0.0
 License: GNU General Public License v2 or later
 Text Domain: starter-theme
@@ -41,7 +41,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --open-menu: var(--menu-toggle);
   --submenu-link-background: var(--menu-toggle);
   --footer-bg: var(--neutral);
-  --nav-links: #ffffff;
+  --small-screen-nav-links: #ffffff;
   --links: #b22222;
   --links-hover: #b22222;
   --blog-bg: #f5f5f5;
@@ -224,6 +224,9 @@ article {
 header#masthead {
   background-color: var(--masthead);
 }
+.site-branding {
+  display: none;
+}
 
 .site-footer {
   background-color: var(--footer-bg);
@@ -306,6 +309,9 @@ input[type="submit"] {
   font-size: 1rem;
   line-height: 1.2;
   padding: 0.75em 1em 0.55em;
+}
+button {
+  background-color: #fff;
 }
 /* remove pill shaped buttons on Webkit browsers */
 input[type="search"],
@@ -439,6 +445,9 @@ a:active {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
+#masthead {
+  position: relative;
+}
 
 img.logo {
   display: block;
@@ -449,21 +458,32 @@ img.logo {
   margin: 0;
   text-align: center;
   flex-basis: 200px;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* container with logo and nav */
+.logo-nav {
+  height: 10vh;
 }
 /* navigation container */
 .main-navigation {
   width: 100%;
   margin: auto;
-  background: rgb(104, 28, 176);
+  display: none;
+}
+.main-navigation.toggled {
+  display: block;
+  transition: transform 0.45s ease-in;
+  height: 90vh;
+  background: var(--open-menu);
 }
 
 /* ul containing the nav elements */
 /* hide on small screens */
 .nav-menu {
-  display: none;
   max-width: 64rem;
   list-style: none;
-  margin: auto;
+  /* margin: auto; */
   padding-left: 0;
 }
 
@@ -475,7 +495,7 @@ img.logo {
   padding: 10px;
   margin-left: 20px;
   border-bottom: none;
-  color: var(--nav-links);
+  color: var(--small-screen-nav-links);
 }
 /* 
   =============
@@ -484,7 +504,6 @@ img.logo {
 */
 .submenu {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-  float: left;
   position: absolute;
   top: 100%;
   left: -999em;
@@ -503,6 +522,7 @@ li.has-children > a:after {
   color: var(--nav-links);
 }
 
+/* for when submenu has another level */
 /* .menu li li.menu-item-has-children > a:after {
   color: var(--submenu-icon);
   content: " ►";
@@ -521,9 +541,23 @@ li.has-children > a:after {
 }
 
 /* submenu links */
+li.has-children:hover ul.submenu {
+  /* make the submenu centered in its container*/
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+}
+/* make submenu links centered */
 .submenu a {
   min-width: 200px;
-  color: var(--nav-links);
+  text-align: center;
+  color: var(--links);
+}
+
+/* remove margin left from links in submenu */
+.submenu li.active a {
+  margin-left: 0;
 }
 
 .main-navigation ul li:hover > ul,
@@ -532,7 +566,6 @@ li.has-children > a:after {
 }
 
 .main-navigation li {
-  /* float: left; */
   position: relative;
 }
 
@@ -541,51 +574,83 @@ li.has-children > a:after {
 .main-navigation.toggled ul {
   display: block;
 }
+.menu-toggle {
+  background-color: transparent;
+}
+/* hamburger menu */
+.menu-toggle div {
+  width: 20px;
+  height: 2px;
+  background-color: var(--links);
+  margin: 5px;
+  transition: all 0.75s;
+}
+/* when clicked (toggled) change appearance to X */
+.menu-toggle[aria-expanded="true"] .line-one {
+  transform: rotateZ(-405deg) translate(-4px, 6px);
+}
+.menu-toggle[aria-expanded="true"] .line-two {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] .line-three {
+  transform: rotateZ(405deg) translate(-3px, -6px);
+}
 
+.logo-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  height: auto;
+}
 button.menu-toggle {
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--menu-toggle);
-  color: var(--white);
-  margin: 1rem auto 0;
+  color: var(--menu-toggle);
   font-size: 1.2rem;
   cursor: pointer;
   border: none;
   padding: 10px;
 }
+button[aria-expanded="true"] {
+  /* top: 0; */
+}
 
 #nav-menu[aria-expanded="true"] {
+  transform: translateY(0);
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  justify-content: center;
   margin: auto;
-  height: 100vh;
-  background-color: var(--open-menu);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); */
 }
 #nav-menu[aria-expanded="true"] a {
   margin: 1rem 0;
 }
 
 @media screen and (min-width: 37.5em) {
-  .menu-toggle {
+  .menu-toggle,
+  .menu-toggle div {
     display: none;
   }
   .main-navigation {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    align-items: flex-end;
+    justify-content: space-evenly;
   }
   .nav-menu {
-    display: block;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     align-content: flex-end;
+  }
+  .nav-menu a {
+    color: var(--links);
+  }
+  .navigation-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 

@@ -41,26 +41,28 @@
 			$starter_theme_description = get_bloginfo( 'description', 'display' );
 			if ( $starter_theme_description || is_customize_preview() ) :
 				?>
-				<p class="site-description"><?php echo $starter_theme_description; /* WPCS: xss ok. */ ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
+		<div class="navigation-container">
+			<div class="logo-nav">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" id="logo-link"><img src="" alt="logo" class="logo"></a>
+				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><div class="line-one"></div><div class="line-two"></div><div class="line-three"></div></button>
 
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" id="logo-link"><img src="" alt="" class="logo">Logo</a>
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'MENU &#9776;', 'update' ); ?></button>
-			<?php
-				wp_nav_menu( array(
-					'theme_location'	=> 'primary',
-					'menu_class'		=> 'nav-menu',
-					'menu_id'			=> 'nav-menu',
-					'container'			=> 'nav',
-					'container_class'	=> 'main-navigation',
-					'container_id'		=>	'main-navigation',
-					'echo'				=> true,
-					'walker'			=> new Clean_Walker_Nav()
-
-				));
-			?>
-		<!-- #site-navigation -->
+				</div><!-- #site-navigation -->
+				<?php
+					wp_nav_menu( array(
+						'theme_location'	=> 'primary',
+						'menu_class'		=> 'nav-menu',
+						'menu_id'			=> 'nav-menu',
+						'container'			=> 'nav',
+						'container_class'	=> 'main-navigation',
+						'container_id'		=>	'main-navigation',
+						'echo'				=> true,
+						'walker'			=> new Clean_Walker_Nav()
+						
+					));
+					?>
+			</div>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">
