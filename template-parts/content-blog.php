@@ -10,7 +10,15 @@
     </aside>
     <?php the_post_thumbnail(); ?>
     <?php the_content(); ?>
-    <?php the_post_navigation(); ?>
+    <!-- %title shows post title;  -->
+    <?php the_post_navigation(array(
+	'prev_text' => '<span class="meta-nav" aria-hidden="true">text for previous post</span> ' .
+		'<span class="screen-reader-text">Previous entry</span> ' .
+		'<span class="post-title">%title</span>',
+	'next_text' => '<span class="meta-nav" aria-hidden="true">Further</span> ' .
+		'<span class="screen-reader-text">text for next post</span> ' .
+		'<span class="post-title">%title</span>',
+) ); ?>
 </article>
 
 <section class="comments-container container">
