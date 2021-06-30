@@ -890,7 +890,6 @@ span.author {
   border-bottom: none;
   color: var(--links);
   padding: 20px;
-  width: 100%;
 }
 
 .nav-previous a:before {
